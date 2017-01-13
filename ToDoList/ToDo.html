@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDoList</title>
+    <link rel="stylesheet" type="text/css" href="ToDo.css"/>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="inputWrapper">
+            <input v-model="message" placeholder="Please enter your plan" class="list_input"/>
+            <button @click="addToList" class="list_add">Add To Do</button>
+            <ol class="my_list">
+                <li is="todo-item" v-for="(todo,index) in todos" v-bind:title="todo"></li>
+            </ol>
+        </div>
+    </div>
+</body>
+<script src="vue.js"></script>
+<script>
+    var data = {haveDone:'未完成'}
+    Vue.component('todo-item', {
+        template:' <li>{{title}} <button v-on:click="removeList" v-bind:class="{isactive:isActive,nonactive:nonActive}">{{haveDone}}</button></li>',
+        props:['title'],
+        data:function () {
+            return{
+                haveDone:'未完成',
+                isActive:false,
+                nonActive:true
+            }
+        },
+        methods:{
+            removeList:function () {
+                this.haveDone='完成',
+                this.isActive=true,
+                this.nonActive=false
+            }
+        }
+    })
+    var app1 = new Vue({
+        el:'#inputWrapper',
+        data:{
+            todos:[],
+            message:this.message,
+            complete:'未完成'
+        },
+        methods:{
+            addToList:function () {
+                if(this.message==null){
+                    alert("待办事项不能为空~");
+                }else{
+                    this.todos.push(this.message);
+                    this.message='';
+                }
+
+            }
+        }
+    })
+</script>
+</html>
