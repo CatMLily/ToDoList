@@ -21,7 +21,7 @@
     },
     methods: {
       addToList() {
-        if (this.message == null) {
+        if (this.message === null) {
           alert('待办事项不能为空~');
         } else {
           this.todos.push({ content: this.message });
