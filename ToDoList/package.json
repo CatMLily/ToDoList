@@ -22,5 +22,7 @@
     "vue-template-compiler": "^2.1.0",
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0"
-  }
+  },
+  "main": "ToDo.js",
+  "license": "ISC"
 }
