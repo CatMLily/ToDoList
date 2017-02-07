@@ -1,9 +1,9 @@
 <template>
   <li>
     <p>
-      <span :contenteditable = "editStatus" @blur = "updateList(title, $event.target)" id="test">{{ title.content }}</span>
+      <span :contenteditable = "editStatus" @blur = "updateList(title, $event.target)" :id="test(titleIndex)">{{ title.content }}</span>
       <button @click = "removeList" :class = "{ isactive: isActive, nonactive: nonActive }">{{ haveDone }}</button>
-      <button @click = "changeEditStatus" class = "isactive">修改</button>
+      <button @click = "changeEditStatus(titleIndex)" class = "isactive">修改</button>
       <button @click = "deleteList(titleIndex)" class = "nonactive">删除</button>
     </p>
   </li>
@@ -19,7 +19,6 @@
         isActive: false,
         nonActive: true,
         editStatus: false,
-        isUpdate: false,
       };
     },
     methods: {
@@ -28,22 +27,24 @@
         this.isActive = true;
         this.nonActive = false;
       },
-      changeEditStatus() {
-        this.isUpdate = true;
+      changeEditStatus(titleIndex) {
         this.editStatus = true;
-        var spanFocus = document.getElementById('test');
+        let spanFocus = document.getElementById('test'+titleIndex);
+        // console.log(spanFocus);
         setTimeout(function() {
           spanFocus.focus();
-        }, 0);
+        }, 10);
       },
       updateList(listValue, target) {
         const myValue = listValue;
         myValue.content = target.innerHTML;
         this.editStatus = false;
-        this.isUpdate = false;
       },
       deleteList(delIndex) {
         this.titleList.splice(delIndex, 1);
+      },
+      test(titleIndex) {
+        return 'test'+titleIndex;
       },
     },
   };
