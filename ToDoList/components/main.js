@@ -5,6 +5,6 @@ import Vue from 'vue';
 import ToDo from './ToDo.vue';
 
 new Vue({
-    el: '#inputWrapper',
-    render: h => h(ToDo)
-})
+  el: '#inputWrapper',
+  render: h => h(ToDo),
+});
